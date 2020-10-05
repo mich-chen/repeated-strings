@@ -1,8 +1,23 @@
 def repeatedString(s, n):
 
     # if string is only 'a', then a shows up n times.
+    set_a = set(s)
+    if len(set_a) == 1 and 'a' in set_a:
+        return n
+
+    num_repeats = n // len(s)
+    num_remaining_letters = n % len(s)
+
+    # use built-in count method for better runtime
+    return ((s.count('a') * num_repeats) + s[:num_remaining_letters].count('a'))
+
+
+"""
+Alternative solution / O(mn)
+def repeatedString(s, n):
+    
     if s == 'a':
-        print(n)
+        return n
 
     count = 0
     # remaining number of letters to complete sequence
@@ -19,7 +34,7 @@ def repeatedString(s, n):
             count += 1
 
     return count
-
+"""
 
 """
 Alternative solution / O(nm)
@@ -36,5 +51,9 @@ def repeatedString(s,n):
             count += 1
 
     return count
-
 """
+
+if __name__ == '__main__':
+
+    print(repeatedString('aba', 10))
+    print(repeatedString('a', 1000000000000000))
